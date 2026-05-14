@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wahid Fkiri — Développeur Full Stack & DevOps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --b900:#060e1c;--b800:#0b1a30;--b700:#0f2548;--b600:#163360;
+  --b500:#1d4ed8;--b400:#3b82f6;--b300:#93c5fd;--b100:#dbeafe;--b50:#eff6ff;
+  --cyan:#06b6d4;--cyan-l:#cffafe;
+  --lt-bg:#f8fafc;--lt-bg2:#ffffff;--lt-text:#0f172a;--lt-mute:#64748b;
+  --lt-bdr:#e2e8f0;
+  --dk-bg:#060e1c;--dk-bg2:#0b1a30;--dk-text:#f1f5f9;--dk-mute:#94a3b8;
+  --r:14px;--rs:8px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;font-weight:400;overflow-x:hidden;background:var(--dk-bg)}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5vw;height:64px;
+  background:rgba(6,14,28,0.88);
+  backdrop-filter:blur(20px) saturate(1.5);
+  border-bottom:1px solid rgba(59,130,246,0.12);
+}
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.06em;
+  color:var(--b400);text-decoration:none;
+}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--dk-mute);text-decoration:none;font-weight:500;transition:color .2s;
+}
+.nav-links a:hover{color:var(--cyan)}
+.nav-pill{
+  background:var(--b500);color:#fff;
+  padding:.45rem 1.2rem;border-radius:999px;
+  font-size:.82rem;font-weight:600;text-decoration:none;letter-spacing:.04em;
+  transition:background .2s,transform .15s;
+}
+.nav-pill:hover{background:var(--b400);transform:scale(1.03)}
+@media(max-width:720px){.nav-links{display:none}}
+
+/* ══ HERO — DARK ══ */
+#hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:9rem 5vw 7rem;
+  background:var(--dk-bg);overflow:hidden;
+}
+#hero::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;height:110px;
+  background:var(--lt-bg);clip-path:polygon(0 100%,100% 0,100% 100%);z-index:2;
+}
+#hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(59,130,246,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(59,130,246,.05) 1px,transparent 1px);
+  background-size:60px 60px;pointer-events:none;
+}
+.glow{
+  position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;
+  animation:pulse 6s ease-in-out infinite alternate;
+}
+.g1{width:580px;height:580px;background:rgba(29,78,216,.22);top:-130px;right:-80px}
+.g2{width:340px;height:340px;background:rgba(6,182,212,.1);bottom:80px;left:12%;animation-delay:-3s}
+@keyframes pulse{from{transform:scale(1);opacity:1}to{transform:scale(1.08);opacity:.8}}
+
+.hero-cnt{position:relative;z-index:1}
+.eyebrow-dark{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--cyan);font-weight:500;margin-bottom:1.2rem;
+}
+.dot{
+  width:7px;height:7px;border-radius:50%;background:var(--cyan);
+  animation:blink 1.5s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+h1.name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(5rem,13vw,11rem);
+  line-height:.88;letter-spacing:.02em;color:var(--dk-text);margin-bottom:.5rem;
+}
+h1.name span{color:var(--b400)}
+
+.hero-role{
+  font-family:'JetBrains Mono',monospace;
+  font-size:clamp(.85rem,1.8vw,1.05rem);
+  color:var(--b300);font-weight:400;margin-bottom:1.8rem;letter-spacing:.04em;
+}
+.slash{color:var(--cyan);margin:0 .4rem}
+.hero-desc{
+  max-width:500px;color:var(--dk-mute);
+  font-size:1.02rem;line-height:1.78;margin-bottom:2.5rem;
+}
+.hero-desc strong{color:var(--dk-text);font-weight:500}
+
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-blue{
+  background:var(--b500);color:#fff;
+  padding:.85rem 2rem;border-radius:var(--rs);
+  font-weight:600;font-size:.92rem;text-decoration:none;letter-spacing:.03em;
+  border:none;cursor:pointer;
+  transition:background .2s,transform .15s,box-shadow .2s;
+  box-shadow:0 4px 20px rgba(29,78,216,.35);
+}
+.btn-blue:hover{background:var(--b400);transform:translateY(-2px);box-shadow:0 8px 28px rgba(59,130,246,.4)}
+.btn-ghost{
+  background:transparent;color:var(--dk-text);
+  padding:.85rem 2rem;border-radius:var(--rs);
+  font-weight:500;font-size:.92rem;text-decoration:none;
+  border:1.5px solid rgba(255,255,255,.14);cursor:pointer;
+  transition:border-color .2s,color .2s;
+}
+.btn-ghost:hover{border-color:var(--b400);color:var(--b300)}
+
+.hero-stats{
+  display:flex;gap:3rem;margin-top:4rem;padding-top:2rem;
+  border-top:1px solid rgba(255,255,255,.06);position:relative;z-index:1;
+}
+.sn{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:.04em;color:var(--b400);line-height:1}
+.sl{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dk-mute);margin-top:.25rem}
+
+/* ══ ABOUT — LIGHT ══ */
+#about{
+  background:var(--lt-bg);color:var(--lt-text);
+  padding:8rem 5vw 7rem;position:relative;
+}
+#about::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;height:90px;
+  background:var(--dk-bg2);clip-path:polygon(0 100%,100% 40%,100% 100%);
+}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;
+  max-width:1100px;margin:0 auto;
+}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr;gap:3rem}}
+
+.about-photo-wrap{position:relative}
+.about-photo{
+  width:100%;aspect-ratio:4/5;border-radius:var(--r);
+  background:linear-gradient(135deg,var(--b100) 0%,#dbeafe 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.8rem;color:var(--lt-mute);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
+  border:1.5px solid var(--lt-bdr);
+  box-shadow:20px 20px 0 var(--b100);
+}
+.about-photo svg{opacity:.28}
+.about-badge{
+  position:absolute;bottom:-1rem;right:-1rem;
+  background:var(--b500);color:#fff;border-radius:var(--rs);
+  padding:.7rem 1.1rem;font-weight:600;font-size:.85rem;
+  box-shadow:0 8px 24px rgba(29,78,216,.3);
+}
+.about-badge span{display:block;font-family:'Bebas Neue';font-size:1.6rem;letter-spacing:.04em}
+
+.eyebrow-light{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--b500);margin-bottom:.7rem;font-weight:500;
+}
+h2.sh{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.4rem,4.5vw,3.8rem);
+  letter-spacing:.03em;line-height:1;margin-bottom:1.8rem;
+}
+.about-text p{font-size:1rem;line-height:1.8;margin-bottom:1rem;color:var(--lt-mute)}
+.about-text p strong{color:var(--lt-text);font-weight:600}
+.pills{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.5rem}
+.pill{
+  font-size:.77rem;padding:.28rem .85rem;border-radius:999px;
+  background:var(--b50);color:var(--b500);border:1px solid var(--b100);font-weight:500;
+}
+
+/* ══ SKILLS — DARK ALT ══ */
+#skills{
+  background:var(--dk-bg2);color:var(--dk-text);
+  padding:8rem 5vw 7rem;position:relative;
+}
+#skills::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;height:90px;
+  background:var(--lt-bg2);clip-path:polygon(0 0,100% 60%,100% 100%,0 100%);
+}
+.skills-wrap{max-width:1100px;margin:0 auto}
+.skills-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+  gap:1.5rem;margin-top:3rem;
+}
+.sk-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:var(--r);padding:1.8rem;
+  transition:border-color .3s,transform .3s;
+}
+.sk-card:hover{border-color:rgba(59,130,246,.35);transform:translateY(-4px)}
+.sk-icon{
+  width:46px;height:46px;border-radius:10px;
+  background:rgba(29,78,216,.18);border:1px solid rgba(59,130,246,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.25rem;margin-bottom:1.1rem;
+}
+.sk-card h3{font-size:1rem;font-weight:600;margin-bottom:1rem;color:var(--dk-text)}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.td{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.67rem;padding:.22rem .58rem;border-radius:4px;
+  background:rgba(59,130,246,.1);color:var(--b300);border:1px solid rgba(59,130,246,.2);
+}
+
+/* ══ EXPERIENCE — LIGHT ALT ══ */
+#experience{
+  background:var(--lt-bg2);color:var(--lt-text);
+  padding:8rem 5vw 7rem;position:relative;
+}
+#experience::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;height:100px;
+  background:var(--dk-bg);clip-path:polygon(0 100%,100% 0,100% 100%);
+}
+.exp-wrap{max-width:860px;margin:0 auto}
+.timeline{position:relative;margin-top:3rem}
+.timeline::before{
+  content:'';position:absolute;left:0;top:8px;bottom:0;width:2px;
+  background:linear-gradient(to bottom,var(--b500),var(--b100));
+}
+.tl{position:relative;padding:0 0 2.8rem 2.8rem}
+.tl::before{
+  content:'';position:absolute;left:-5px;top:7px;
+  width:12px;height:12px;border-radius:50%;
+  background:var(--b500);border:2px solid var(--lt-bg2);
+  box-shadow:0 0 0 3px rgba(29,78,216,.2);
+}
+.tl-date{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;color:var(--b500);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.3rem;
+}
+.tl-t{font-size:1.08rem;font-weight:700;color:var(--lt-text);margin-bottom:.15rem}
+.tl-c{font-size:.87rem;color:var(--lt-mute);margin-bottom:.6rem;font-weight:500}
+.tl-d{font-size:.9rem;color:var(--lt-mute);line-height:1.75;margin-bottom:.75rem}
+.tl-tech{display:flex;flex-wrap:wrap;gap:.35rem}
+.tl{font-size:.65rem;padding:.2rem .55rem;border-radius:4px}
+.tl-tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;padding:.2rem .55rem;border-radius:4px;
+  background:var(--b50);color:var(--b500);border:1px solid var(--b100);
+}
+
+/* ══ PROJECTS — DARK ══ */
+#projects{
+  background:var(--dk-bg);color:var(--dk-text);
+  padding:8rem 5vw 7rem;position:relative;
+}
+#projects::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;height:90px;
+  background:var(--lt-bg);clip-path:polygon(0 60%,100% 0,100% 100%,0 100%);
+}
+.projects-wrap{max-width:1100px;margin:0 auto}
+.proj-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));
+  gap:2rem;margin-top:3rem;
+}
+.proj-card{
+  background:var(--dk-bg2);border:1px solid rgba(255,255,255,.06);
+  border-radius:var(--r);overflow:hidden;
+  transition:border-color .3s,transform .3s,box-shadow .3s;
+}
+.proj-card:hover{border-color:rgba(59,130,246,.3);transform:translateY(-6px);box-shadow:0 20px 50px rgba(6,182,212,.08)}
+.proj-thumb{
+  width:100%;aspect-ratio:16/9;
+  background:linear-gradient(135deg,var(--b700) 0%,var(--b600) 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.5rem;color:var(--dk-mute);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.proj-thumb svg{opacity:.2}
+.proj-body{padding:1.6rem}
+.proj-cat{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:.5rem;
+}
+.proj-body h3{font-size:1.05rem;font-weight:600;margin-bottom:.6rem}
+.proj-body p{color:var(--dk-mute);font-size:.88rem;line-height:1.65;margin-bottom:1rem}
+
+/* ══ CONTACT — LIGHT ══ */
+#contact{
+  background:var(--lt-bg);color:var(--lt-text);
+  padding:8rem 5vw 7rem;
+}
+.contact-inner{max-width:680px;margin:0 auto;text-align:center}
+.contact-card{
+  background:var(--lt-bg2);border:1.5px solid var(--lt-bdr);
+  border-radius:var(--r);padding:3rem 2.5rem;
+  box-shadow:0 4px 40px rgba(0,0,0,.06);margin-top:3rem;
+}
+.contact-card p{color:var(--lt-mute);line-height:1.8;margin-bottom:2rem}
+.btn-solid{
+  display:inline-block;background:var(--b500);color:#fff;
+  padding:.9rem 2.2rem;border-radius:var(--rs);
+  font-weight:600;font-size:.95rem;text-decoration:none;
+  transition:background .2s,transform .15s;
+}
+.btn-solid:hover{background:var(--b400);transform:translateY(-2px)}
+.contact-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.8rem}
+.chip{
+  display:flex;align-items:center;gap:.5rem;color:var(--lt-mute);
+  text-decoration:none;font-size:.87rem;padding:.55rem 1.1rem;
+  border:1px solid var(--lt-bdr);border-radius:999px;
+  transition:border-color .2s,color .2s;
+}
+.chip:hover{border-color:var(--b400);color:var(--b500)}
+
+footer{
+  background:var(--dk-bg);color:var(--dk-mute);
+  text-align:center;padding:2rem 5vw;
+  font-size:.8rem;letter-spacing:.05em;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+footer span{color:var(--b400)}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">WF.</a>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#skills">Stack</a></li>
+    <li><a href="#experience">Parcours</a></li>
+    <li><a href="#projects">Projets</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:wahidfkiri5@gmail.com" class="nav-pill">Me contacter</a>
+</nav>
+
+<!-- ════ HERO · DARK ════ -->
+<section id="hero">
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+  <div class="hero-cnt">
+    <div class="eyebrow-dark"><span class="dot"></span>Disponible pour nouvelles opportunités</div>
+    <h1 class="name">Wahid<br><span>Fkiri</span></h1>
+    <div class="hero-role">
+      Développeur Full Stack<span class="slash">/</span>PHP · Laravel · React<span class="slash">/</span>DevOps
+    </div>
+    <p class="hero-desc">
+      Plus de <strong>5 ans d'expérience</strong> dans la conception de solutions web performantes —
+      des plateformes SaaS multi-tenant aux architectures microservices containerisées et déploiements cloud <strong>AWS</strong>.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-blue">Voir mes projets</a>
+      <a href="#contact"  class="btn-ghost">Me contacter</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="sn">5+</div><div class="sl">Ans d'expérience</div></div>
+      <div><div class="sn">10+</div><div class="sl">Projets livrés</div></div>
+      <div><div class="sn">SaaS</div><div class="sl">Expert Multi-Tenant</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ ABOUT · LIGHT ════ -->
+<section id="about">
+  <div class="about-grid reveal">
+    <div class="about-photo-wrap">
+      <!-- ↓ Remplacez par votre photo : <img src="photo.jpg" style="width:100%;border-radius:14px;aspect-ratio:4/5;object-fit:cover"> -->
+      <div class="about-photo">
+        <svg width="68" height="68" fill="none" viewBox="0 0 24 24" stroke="#1d4ed8" stroke-width=".8">
+          <path stroke-linecap="round" d="M5.121 17.804A9 9 0 1118.88 6.196M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        <span>Votre photo ici</span>
+      </div>
+      <div class="about-badge"><span>5+</span>ans d'exp.</div>
+    </div>
+    <div class="about-text">
+      <div class="eyebrow-light">// À propos de moi</div>
+      <h2 class="sh">Développeur<br>passionné &amp;<br>pragmatique</h2>
+      <p>Je suis <strong>Wahid Fkiri</strong>, développeur Full Stack basé à Bardo, Tunis. Spécialisé en <strong>PHP / Laravel, Vue.js et React JS</strong>, je conçois des architectures robustes et évolutives.</p>
+      <p>Mon expertise couvre la <strong>containerisation Docker</strong>, l'administration Linux et le déploiement cloud via <strong>AWS S3, EC2 et Nginx</strong>. Je travaille en méthodologie Agile Scrum avec une attention particulière à la qualité du code.</p>
+      <div class="pills">
+        <span class="pill">Laravel</span><span class="pill">React JS</span><span class="pill">Vue.js</span>
+        <span class="pill">Docker</span><span class="pill">AWS</span><span class="pill">Linux</span>
+        <span class="pill">CI/CD</span><span class="pill">Agile Scrum</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SKILLS · DARK ALT ════ -->
+<section id="skills">
+  <div class="skills-wrap">
+    <div class="reveal">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:.7rem">// Stack technique</div>
+      <h2 class="sh">Compétences &amp;<br>Technologies</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="sk-card reveal"><div class="sk-icon">⚙️</div><h3>Backend</h3><div class="tags"><span class="td">PHP 8</span><span class="td">Laravel 9/10</span><span class="td">Symfony</span><span class="td">REST API</span><span class="td">Livewire</span><span class="td">Queue</span><span class="td">WebSockets</span><span class="td">Socket.IO</span></div></div>
+      <div class="sk-card reveal"><div class="sk-icon">🎨</div><h3>Frontend</h3><div class="tags"><span class="td">React JS</span><span class="td">Vue 3</span><span class="td">Vite</span><span class="td">Tailwind CSS</span><span class="td">Bootstrap</span><span class="td">jQuery / AJAX</span><span class="td">Storybook</span></div></div>
+      <div class="sk-card reveal"><div class="sk-icon">🐳</div><h3>DevOps &amp; Cloud</h3><div class="tags"><span class="td">Docker</span><span class="td">AWS S3/EC2</span><span class="td">Nginx</span><span class="td">Apache</span><span class="td">Linux Ubuntu</span><span class="td">GitLab CI/CD</span><span class="td">VPS</span></div></div>
+      <div class="sk-card reveal"><div class="sk-icon">🗄️</div><h3>Base de données</h3><div class="tags"><span class="td">MySQL</span><span class="td">MongoDB</span><span class="td">Eloquent ORM</span><span class="td">DataTables</span><span class="td">DomPDF</span></div></div>
+      <div class="sk-card reveal"><div class="sk-icon">🔗</div><h3>Intégrations &amp; APIs</h3><div class="tags"><span class="td">OAuth2</span><span class="td">Google APIs</span><span class="td">Dropbox</span><span class="td">Slack API</span><span class="td">Notion API</span><span class="td">Stripe</span><span class="td">PayPal</span><span class="td">ClickToPay</span></div></div>
+      <div class="sk-card reveal"><div class="sk-icon">📋</div><h3>Méthodes &amp; Outils</h3><div class="tags"><span class="td">Agile Scrum</span><span class="td">Git</span><span class="td">GitLab</span><span class="td">Jira</span><span class="td">JWT</span><span class="td">RBAC</span><span class="td">Tauri</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ EXPERIENCE · LIGHT ALT ════ -->
+<section id="experience">
+  <div class="exp-wrap">
+    <div class="reveal">
+      <div class="eyebrow-light">// Parcours professionnel</div>
+      <h2 class="sh" style="color:var(--lt-text)">Expérience</h2>
+    </div>
+    <div class="timeline">
+
+      <div class="tl reveal">
+        <div class="tl-date">12/2025 — Présent</div>
+        <div class="tl-t">Développeur Web Freelance (Auto-entrepreneur)</div>
+        <div class="tl-c">Go Exploria Next Level — Canada (Remote)</div>
+        <div class="tl-d">Conception et développement de sites web et CRM interne. Architectures backend Laravel avec intégrations AWS. Collaboration internationale en méthodologie Agile.</div>
+        <div class="tl-tech"><span class="tl-tag">Laravel</span><span class="tl-tag">React JS</span><span class="tl-tag">AWS</span><span class="tl-tag">SEO / UX</span></div>
+      </div>
+
+      <div class="tl reveal">
+        <div class="tl-date">10/2025 — Tunisie</div>
+        <div class="tl-t">Plateforme CRM SaaS Multi-entreprises</div>
+        <div class="tl-c">Projet indépendant</div>
+        <div class="tl-d">CRM multi-tenant modulaire : espace isolé par client, mailing Roundcube (Docker), cloud unifié (AWS S3, Dropbox, Google Drive), architecture microservices, CI/CD automatisé GitLab.</div>
+        <div class="tl-tech"><span class="tl-tag">Laravel</span><span class="tl-tag">React.js</span><span class="tl-tag">Docker</span><span class="tl-tag">AWS S3</span><span class="tl-tag">GitLab CI/CD</span><span class="tl-tag">Nginx</span></div>
+      </div>
+
+      <div class="tl reveal">
+        <div class="tl-date">07/2025 — Tunisie</div>
+        <div class="tl-t">CRM sur mesure — Société Turki Avocats</div>
+        <div class="tl-c">Mission Freelance</div>
+        <div class="tl-d">CRM complet : dossiers clients, messagerie interne, archivage cloud sécurisé. Intégration OnlyOffice via Docker pour édition en ligne. Déploiement VPS Linux.</div>
+        <div class="tl-tech"><span class="tl-tag">Laravel</span><span class="tl-tag">OnlyOffice</span><span class="tl-tag">Docker</span><span class="tl-tag">VPS Linux</span></div>
+      </div>
+
+      <div class="tl reveal">
+        <div class="tl-date">03/2025 — Tunisie</div>
+        <div class="tl-t">Développeur Web Full Stack</div>
+        <div class="tl-c">Global Med Trading Company</div>
+        <div class="tl-d">Plateforme e-commerce multi-tenant et paiement sécurisé (ClickToPay, Konnect, PayPal, Stripe). Notifications temps réel, JWT, optimisation performances.</div>
+        <div class="tl-tech"><span class="tl-tag">Laravel</span><span class="tl-tag">React.js</span><span class="tl-tag">Flutter</span><span class="tl-tag">MongoDB</span><span class="tl-tag">Stripe</span><span class="tl-tag">WebSockets</span></div>
+      </div>
+
+      <div class="tl reveal">
+        <div class="tl-date">07/2020 — 02/2025 · Tunisie</div>
+        <div class="tl-t">Développeur Web Full Stack</div>
+        <div class="tl-c">STEP SA</div>
+        <div class="tl-d">ERP/CRM sur mesure, système de tickets de support et plateforme de gestion de projets agiles avec suivi temps réel. Déploiement AWS EC2 + S3.</div>
+        <div class="tl-tech"><span class="tl-tag">Laravel</span><span class="tl-tag">Livewire</span><span class="tl-tag">Symfony</span><span class="tl-tag">React</span><span class="tl-tag">AWS EC2</span><span class="tl-tag">Tailwind</span></div>
+      </div>
+
+      <div class="tl reveal">
+        <div class="tl-date">12/2019 — 06/2020 · Tunisie</div>
+        <div class="tl-t">Développeur Web</div>
+        <div class="tl-c">IYAD ALMASHARQH</div>
+        <div class="tl-d">Conception de sites web et applications pour clients variés. Sites WordPress personnalisés, gestion de projet via Git, GitLab et Jira.</div>
+        <div class="tl-tech"><span class="tl-tag">PHP</span><span class="tl-tag">Laravel</span><span class="tl-tag">MySQL</span><span class="tl-tag">WordPress</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ PROJECTS · DARK ════ -->
+<section id="projects">
+  <div class="projects-wrap">
+    <div class="reveal">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:.7rem">// Portfolio</div>
+      <h2 class="sh">Projets<br>Sélectionnés</h2>
+    </div>
+    <div class="proj-grid">
+
+      <div class="proj-card reveal">
+        <!-- <img src="nexus.png" style="width:100%;aspect-ratio:16/9;object-fit:cover"> -->
+        <div class="proj-thumb">
+          <svg width="44" height="44" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" stroke-width=".8"/><path d="M3 9h18M9 21V9" stroke-width=".8"/></svg>
+          <span>Screenshot projet</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-cat">SaaS · 2026</div>
+          <h3>Nexus CRM — Multi-Tenant</h3>
+          <p>CRM modulaire avec marketplace d'extensions, automatisation "human-in-the-loop", OAuth2 (Google, Slack, Dropbox, Notion) et version desktop Tauri.</p>
+          <div class="tags"><span class="td">Laravel 10</span><span class="td">Vue 3</span><span class="td">OAuth2</span><span class="td">Socket.IO</span><span class="td">Tauri</span></div>
+        </div>
+      </div>
+
+      
+
+      <div class="proj-card reveal">
+        <!-- <img src="nexus.png" style="width:100%;aspect-ratio:16/9;object-fit:cover"> -->
+        <div class="proj-thumb">
+          <svg width="44" height="44" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" stroke-width=".8"/><path d="M3 9h18M9 21V9" stroke-width=".8"/></svg>
+          <span>Screenshot projet</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-cat">SaaS · 2026</div>
+          <h3>Turki Avocatst</h3>
+          <p>CRM modulaire pour la gestion des avocats, </p>
+          <div class="tags"><span class="td">Laravel 10</span><span class="td">Vue 3</span><span class="td">OAuth2</span><span class="td">Socket.IO</span><span class="td">Tauri</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <!-- <img src="checktime.png" style="width:100%;aspect-ratio:16/9;object-fit:cover"> -->
+        <div class="proj-thumb">
+          <svg width="44" height="44" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="9" stroke-width=".8"/><path d="M12 8v4l3 3" stroke-width=".8" stroke-linecap="round"/></svg>
+          <span>Screenshot projet</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-cat">RH · 2026</div>
+          <h3>Checktime — Pointage Biométrique</h3>
+          <p>Application multi-clients de gestion des présences : pointage biométrique, plannings, absences/retards, exports PDF. Architecture modulaire par domaines.</p>
+          <div class="tags"><span class="td">Laravel 9</span><span class="td">PHP 8</span><span class="td">DataTables</span><span class="td">DomPDF</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <!-- <img src="ecom.png" style="width:100%;aspect-ratio:16/9;object-fit:cover"> -->
+        <div class="proj-thumb">
+          <svg width="44" height="44" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.4 5h12.8M9 21a1 1 0 100-2 1 1 0 000 2zm10 0a1 1 0 100-2 1 1 0 000 2z" stroke-width=".8" stroke-linecap="round"/></svg>
+          <span>Screenshot projet</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-cat">E-commerce · 2025</div>
+          <h3>Plateforme E-commerce Multi-Tenant</h3>
+          <p>Boutique multi-vendeurs avec thèmes par sous-domaine, notifications WebSockets, JWT, CI/CD GitLab, déploiement VPS Ubuntu.</p>
+          <div class="tags"><span class="td">Laravel</span><span class="td">React.js</span><span class="td">Flutter</span><span class="td">WebSockets</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <!-- <img src="pay.png" style="width:100%;aspect-ratio:16/9;object-fit:cover"> -->
+        <div class="proj-thumb">
+          <svg width="44" height="44" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="2" y="5" width="20" height="14" rx="2" stroke-width=".8"/><path d="M2 10h20" stroke-width=".8"/></svg>
+          <span>Screenshot projet</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-cat">Fintech · 2025</div>
+          <h3>Plateforme Paiement Sécurisée</h3>
+          <p>Intégration ClickToPay, Konnect, PayPal & Stripe. Multidevise, callbacks, retries automatiques, tests unitaires et fonctionnels.</p>
+          <div class="tags"><span class="td">Laravel</span><span class="td">React JS</span><span class="td">Stripe</span><span class="td">WebSockets</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ CONTACT · LIGHT ════ -->
+<section id="contact">
+  <div class="contact-inner reveal">
+    <div class="eyebrow-light">// Contact</div>
+    <h2 class="sh" style="color:var(--lt-text)">Travaillons<br>ensemble</h2>
+    <div class="contact-card">
+      <p>Vous avez un projet ambitieux ou un poste à pourvoir ? Disponible pour missions freelance ou temps plein. Je réponds sous 24h.</p>
+      <a href="mailto:wahidfkiri5@gmail.com" class="btn-solid">wahidfkiri5@gmail.com</a>
+      <div class="contact-row">
+        <a href="tel:+21627588999" class="chip">
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M3 5.75A2.75 2.75 0 015.75 3h1.5A1.75 1.75 0 019 4.75v2A1.75 1.75 0 017.25 8.5h-.5a.25.25 0 00-.25.25c0 1.25.5 3.25 3.75 6.5s5.25 3.75 6.5 3.75a.25.25 0 00.25-.25v-.5A1.75 1.75 0 0118.75 16h2A1.75 1.75 0 0122.5 17.75v1.5A2.75 2.75 0 0119.75 22C10.5 22 3 14.5 3 5.75z"/></svg>
+          (+216) 27 588 999
+        </a>
+        <a href="https://linkedin.com/in/wahid-fkiri-64b66519b" target="_blank" class="chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM9 17H6.477v-7H9V17zM7.694 8.717c-.771 0-1.286-.514-1.286-1.2s.514-1.2 1.371-1.2c.771 0 1.286.514 1.286 1.2s-.514 1.2-1.371 1.2zM18 17h-2.442v-3.826c0-1.058-.651-1.302-.895-1.302s-1.058.163-1.058 1.302V17h-2.523v-7h2.523v.977c.325-.57.976-.977 2.197-.977C17.024 10 18 11.058 18 13.174V17z"/></svg>
+          LinkedIn
+        </a>
+        <a href="#" class="chip">
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+          Bardo, Tunis
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 <span>Wahid Fkiri</span> — Développeur Full Stack &amp; DevOps · Tunis, Tunisie</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  el.style.transitionDelay = (i % 5) * 0.08 + 's';
+  io.observe(el);
+});
+</script>
+</body>
+</html>
