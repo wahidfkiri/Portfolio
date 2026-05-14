@@ -6,6 +6,7 @@
 <title>Wahid Fkiri — Développeur Full Stack & DevOps</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <style>
 :root {
   --b900:#060e1c;--b800:#0b1a30;--b700:#0f2548;--b600:#163360;
@@ -74,7 +75,35 @@ nav{
 .g2{width:340px;height:340px;background:rgba(6,182,212,.1);bottom:80px;left:12%;animation-delay:-3s}
 @keyframes pulse{from{transform:scale(1);opacity:1}to{transform:scale(1.08);opacity:.8}}
 
-.hero-cnt{position:relative;z-index:1}
+.hero-cnt{position:relative;z-index:1;max-width:1200px;margin:0 auto;width:100%}
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);
+  gap:clamp(2rem,5vw,4rem);
+  align-items:center;
+}
+.hero-copy{min-width:0}
+.hero-photo-wrap{
+  justify-self:end;
+  width:min(420px,34vw);
+}
+.hero-photo{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  display:block;
+  border-radius:var(--r);
+  border:1px solid rgba(59,130,246,.28);
+  box-shadow:18px 18px 0 rgba(59,130,246,.18),0 18px 40px rgba(0,0,0,.35);
+}
+@media(max-width:980px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-photo-wrap{
+    width:min(420px,78vw);
+    justify-self:start;
+    margin-top:1.2rem;
+  }
+}
 .eyebrow-dark{
   display:inline-flex;align-items:center;gap:.6rem;
   font-family:'JetBrains Mono',monospace;
@@ -155,8 +184,15 @@ h1.name span{color:var(--b400)}
   gap:.8rem;color:var(--lt-mute);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
   border:1.5px solid var(--lt-bdr);
   box-shadow:20px 20px 0 var(--b100);
+  overflow:hidden;
 }
 .about-photo svg{opacity:.28}
+.about-photo-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
 .about-badge{
   position:absolute;bottom:-1rem;right:-1rem;
   background:var(--b500);color:#fff;border-radius:var(--rs);
@@ -283,6 +319,21 @@ h2.sh{
   border-bottom:1px solid rgba(255,255,255,.05);
 }
 .proj-thumb svg{opacity:.2}
+.proj-thumb.swiper{padding:0}
+.proj-thumb .swiper-wrapper{height:100%}
+.proj-thumb .swiper-slide{width:100%;height:100%}
+.proj-thumb .swiper-slide img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.proj-thumb .swiper-button-next,
+.proj-thumb .swiper-button-prev{
+  color:#fff;width:28px;height:28px;
+  background:rgba(6,14,28,.55);border:1px solid rgba(255,255,255,.25);border-radius:999px;
+}
+.proj-thumb .swiper-button-next::after,
+.proj-thumb .swiper-button-prev::after{font-size:12px;font-weight:700}
+.proj-thumb .swiper-pagination-bullet{background:rgba(255,255,255,.75);opacity:.8}
+.proj-thumb .swiper-pagination-bullet-active{background:#fff;opacity:1}
 .proj-body{padding:1.6rem}
 .proj-cat{
   font-family:'JetBrains Mono',monospace;
@@ -350,6 +401,8 @@ footer span{color:var(--b400)}
   <div class="glow g1"></div>
   <div class="glow g2"></div>
   <div class="hero-cnt">
+    <div class="hero-grid">
+      <div class="hero-copy">
     <div class="eyebrow-dark"><span class="dot"></span>Disponible pour nouvelles opportunités</div>
     <h1 class="name">Wahid<br><span>Fkiri</span></h1>
     <div class="hero-role">
@@ -368,6 +421,11 @@ footer span{color:var(--b400)}
       <div><div class="sn">10+</div><div class="sl">Projets livrés</div></div>
       <div><div class="sn">SaaS</div><div class="sl">Expert Multi-Tenant</div></div>
     </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <img src="profil.png" alt="Photo de profil de Wahid Fkiri" class="hero-photo">
+      </div>
+    </div>
   </div>
 </section>
 
@@ -377,10 +435,7 @@ footer span{color:var(--b400)}
     <div class="about-photo-wrap">
       <!-- ↓ Remplacez par votre photo : <img src="photo.jpg" style="width:100%;border-radius:14px;aspect-ratio:4/5;object-fit:cover"> -->
       <div class="about-photo">
-        <svg width="68" height="68" fill="none" viewBox="0 0 24 24" stroke="#1d4ed8" stroke-width=".8">
-          <path stroke-linecap="round" d="M5.121 17.804A9 9 0 1118.88 6.196M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-        </svg>
-        <span>Votre photo ici</span>
+        <img src="profil.png" alt="Photo de profil de Wahid Fkiri" class="about-photo-img">
       </div>
       <div class="about-badge"><span>5+</span>ans d'exp.</div>
     </div>
@@ -504,13 +559,20 @@ footer span{color:var(--b400)}
 
       <div class="proj-card reveal">
         <!-- <img src="nexus.png" style="width:100%;aspect-ratio:16/9;object-fit:cover"> -->
-        <div class="proj-thumb">
-          <svg width="44" height="44" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" stroke-width=".8"/><path d="M3 9h18M9 21V9" stroke-width=".8"/></svg>
-          <span>Screenshot projet</span>
+        <div class="proj-thumb swiper turki-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="images/Turki%20Avocats/image%201.png" alt="Turki Avocats - image 1"></div>
+            <div class="swiper-slide"><img src="images/Turki%20Avocats/image%202.png" alt="Turki Avocats - image 2"></div>
+            <div class="swiper-slide"><img src="images/Turki%20Avocats/image%203.png" alt="Turki Avocats - image 3"></div>
+            <div class="swiper-slide"><img src="images/Turki%20Avocats/image%204.png" alt="Turki Avocats - image 4"></div>
+          </div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-pagination"></div>
         </div>
         <div class="proj-body">
           <div class="proj-cat">SaaS · 2026</div>
-          <h3>Turki Avocatst</h3>
+          <h3>Turki Avocats</h3>
           <p>CRM modulaire pour la gestion des avocats, </p>
           <div class="tags"><span class="td">Laravel 10</span><span class="td">Vue 3</span><span class="td">OAuth2</span><span class="td">Socket.IO</span><span class="td">Tauri</span></div>
         </div>
@@ -590,7 +652,29 @@ footer span{color:var(--b400)}
 
 <footer>© 2026 <span>Wahid Fkiri</span> — Développeur Full Stack &amp; DevOps · Tunis, Tunisie</footer>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
+const turkiSliderEl = document.querySelector('.turki-swiper');
+if (turkiSliderEl && typeof Swiper !== 'undefined') {
+  new Swiper(turkiSliderEl, {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    loop: true,
+    speed: 500,
+    navigation: {
+      nextEl: '.turki-swiper .swiper-button-next',
+      prevEl: '.turki-swiper .swiper-button-prev',
+    },
+    pagination: {
+      el: '.turki-swiper .swiper-pagination',
+      clickable: true,
+    },
+    keyboard: {
+      enabled: true,
+    },
+  });
+}
+
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
 }, { threshold: 0.08 });
