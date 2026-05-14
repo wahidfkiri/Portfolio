@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -573,16 +573,23 @@ footer span{color:var(--b400)}
         <div class="proj-body">
           <div class="proj-cat">SaaS · 2026</div>
           <h3>Turki Avocats</h3>
-          <p>CRM modulaire pour la gestion des avocats, </p>
+          <p>Application web de gestion de cabinet d’avocats permettant le suivi centralisé des dossiers, intervenants, tâches, agendas, temps passés, facturation et documents, avec intégration messagerie et édition documentaire collaborative. </p>
           <div class="tags"><span class="td">Laravel 10</span><span class="td">Vue 3</span><span class="td">OAuth2</span><span class="td">Socket.IO</span><span class="td">Tauri</span></div>
         </div>
       </div>
 
       <div class="proj-card reveal">
         <!-- <img src="checktime.png" style="width:100%;aspect-ratio:16/9;object-fit:cover"> -->
-        <div class="proj-thumb">
-          <svg width="44" height="44" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="9" stroke-width=".8"/><path d="M12 8v4l3 3" stroke-width=".8" stroke-linecap="round"/></svg>
-          <span>Screenshot projet</span>
+        <div class="proj-thumb swiper checktime-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="images/Checktime/image%201.png" alt="Checktime - image 1"></div>
+            <div class="swiper-slide"><img src="images/Checktime/image%202.png" alt="Checktime - image 2"></div>
+            <div class="swiper-slide"><img src="images/Checktime/image%203.png" alt="Checktime - image 3"></div>
+            <div class="swiper-slide"><img src="images/Checktime/image%204.png" alt="Checktime - image 4"></div>
+          </div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-pagination"></div>
         </div>
         <div class="proj-body">
           <div class="proj-cat">RH · 2026</div>
@@ -654,25 +661,37 @@ footer span{color:var(--b400)}
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-const turkiSliderEl = document.querySelector('.turki-swiper');
-if (turkiSliderEl && typeof Swiper !== 'undefined') {
-  new Swiper(turkiSliderEl, {
-    slidesPerView: 1,
-    spaceBetween: 0,
-    loop: true,
-    speed: 500,
-    navigation: {
-      nextEl: '.turki-swiper .swiper-button-next',
-      prevEl: '.turki-swiper .swiper-button-prev',
-    },
-    pagination: {
-      el: '.turki-swiper .swiper-pagination',
-      clickable: true,
-    },
-    keyboard: {
-      enabled: true,
-    },
-  });
+if (typeof Swiper !== 'undefined') {
+  const initProjectSwiper = (selector) => {
+    const el = document.querySelector(selector);
+    if (!el) return;
+
+    new Swiper(el, {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      loop: true,
+      speed: 500,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
+      navigation: {
+        nextEl: `${selector} .swiper-button-next`,
+        prevEl: `${selector} .swiper-button-prev`,
+      },
+      pagination: {
+        el: `${selector} .swiper-pagination`,
+        clickable: true,
+      },
+      keyboard: {
+        enabled: true,
+      },
+    });
+  };
+
+  initProjectSwiper('.turki-swiper');
+  initProjectSwiper('.checktime-swiper');
 }
 
 const io = new IntersectionObserver(entries => {
